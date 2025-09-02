@@ -2,95 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Farmer-friendly agricultural app design system
+All colors MUST be HSL. Dark green, white, brown theme.
 */
 
 @layer base {
   :root {
+    /* Agricultural color palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 120 50% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 120 50% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 120 50% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Dark green primary */
+    --primary: 123 68% 23%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Light green secondary */
+    --secondary: 123 35% 85%;
+    --secondary-foreground: 123 68% 23%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted greens */
+    --muted: 123 25% 92%;
+    --muted-foreground: 123 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Brown accent */
+    --accent: 21 16% 47%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 123 25% 88%;
+    --input: 123 25% 88%;
+    --ring: 123 68% 23%;
+
+    /* Agricultural theme colors */
+    --earth-brown: 21 25% 35%;
+    --soil-dark: 30 20% 25%;
+    --leaf-green: 123 50% 45%;
+    --harvest-gold: 45 95% 65%;
+    --sky-blue: 200 85% 70%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(123 68% 23%), hsl(123 50% 45%));
+    --gradient-earth: linear-gradient(180deg, hsl(21 25% 35%), hsl(30 20% 25%));
+    --gradient-subtle: linear-gradient(180deg, hsl(123 25% 92%), hsl(0 0% 100%));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(123 68% 23% / 0.08);
+    --shadow-brown: 0 4px 15px hsl(21 16% 47% / 0.15);
+    --shadow-green: 0 6px 25px hsl(123 68% 23% / 0.12);
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Dark mode not implemented for agricultural app - keeping light theme */
+    --background: 0 0% 100%;
+    --foreground: 120 50% 15%;
   }
 }
 
@@ -100,6 +77,45 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  /* Agricultural component utilities */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .earth-gradient {
+    background: var(--gradient-earth);
+  }
+  
+  .subtle-gradient {
+    background: var(--gradient-subtle);
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-brown {
+    box-shadow: var(--shadow-brown);
+  }
+  
+  .shadow-green {
+    box-shadow: var(--shadow-green);
+  }
+  
+  .farmer-card {
+    @apply bg-card rounded-lg p-6 shadow-soft border border-border transition-all duration-300 hover:shadow-green hover:scale-[1.02];
+  }
+  
+  .feature-button {
+    @apply bg-primary text-primary-foreground px-6 py-4 rounded-lg font-semibold text-lg shadow-brown transition-all duration-300 hover:shadow-green hover:scale-105 flex items-center gap-3;
+  }
+  
+  .accent-button {
+    @apply bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium shadow-brown transition-all duration-300 hover:shadow-green hover:scale-105;
   }
 }
