@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "title": "Smart Farming Solutions",
+    "subtitle": "Technology that helps farmers grow better",
+    "description": "Access weather forecasts, pest detection, market prices, and expert advice all in one place",
+    "startButton": "Get Started",
+    "demoButton": "Watch Demo",
+    "imageAlt": "Farmer in field using smart technology"
+  },
+  "features": {
+    "pestDetection": {
+      "title": "Pest Detection",
+      "description": "Identify crop diseases and get treatment recommendations",
+      "uploadDescription": "Upload a clear photo of the affected plant for instant analysis"
+    },
+    "weather": {
+      "title": "Weather Forecast",
+      "description": "Get accurate weather predictions and farming advice"
+    },
+    "market": {
+      "title": "Market Prices",
+      "description": "Stay updated with current crop prices and trends"
+    },
+    "soil": {
+      "title": "Soil Analysis",
+      "description": "Upload soil test reports for personalized recommendations",
+      "uploadDescription": "Upload your soil test report for detailed analysis"
+    }
+  },
+  "explore": {
+    "title": "Explore More Features",
+    "description": "Discover tools and resources to help you farm smarter",
+    "news": {
+      "title": "News & Schemes",
+      "description": "Stay updated with latest agricultural news and government schemes",
+      "button": "Read More"
+    },
+    "education": {
+      "title": "Learning Hub",
+      "description": "Access farming guides and educational resources",
+      "button": "Start Learning"
+    },
+    "contact": {
+      "title": "Get Support",
+      "description": "Connect with experts and get your questions answered",
+      "button": "Contact Us"
+    }
+  },
+  "footer": {
+    "title": "Green Seed Aid",
+    "description": "Empowering farmers with smart technology",
+    "quickLinks": {
+      "title": "Quick Links",
+      "home": "Home",
+      "news": "News & Schemes",
+      "education": "Education",
+      "contact": "Contact"
+    },
+    "support": {
+      "title": "Support",
+      "helpline": "Helpline: 1800-XXX-XXXX",
+      "email": "support@greenseedaid.com",
+      "whatsapp": "WhatsApp Support"
+    },
+    "languages": {
+      "title": "Languages",
+      "english": "English",
+      "hindi": "हिंदी",
+      "odia": "ଓଡ଼ିଆ",
+      "bengali": "বাংলা"
+    },
+    "rights": "© 2025 Green Seed Aid. All rights reserved."
+  }
+}

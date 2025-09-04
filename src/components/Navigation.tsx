@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Globe, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const { i18n, t } = useTranslation();
   const location = useLocation();
 
-  const languages = ['English', 'हिंदी', 'ଓଡ଼ିଆ', 'বাংলা'];
+  const languages = [
+    { code: 'en', label: 'English' },
+    { code: 'hi', label: 'हिंदी' },
+    { code: 'or', label: 'ଓଡ଼ିଆ' },
+    { code: 'bn', label: 'বাংলা' }
+  ];
   
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -55,7 +61,7 @@ const Navigation = () => {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 <Globe className="w-4 h-4" />
-                {selectedLanguage}
+                {languages.find(lang => lang.code === i18n.language)?.label || 'English'}
                 <ChevronDown className="w-4 h-4" />
               </Button>
               
@@ -63,14 +69,14 @@ const Navigation = () => {
                 <div className="absolute right-0 mt-2 w-48 bg-card rounded-lg shadow-soft border border-border z-50">
                   {languages.map(lang => (
                     <button
-                      key={lang}
+                      key={lang.code}
                       className="w-full text-left px-4 py-2 hover:bg-muted rounded-lg transition-colors"
                       onClick={() => {
-                        setSelectedLanguage(lang);
+                        i18n.changeLanguage(lang.code);
                         setIsMenuOpen(false);
                       }}
                     >
-                      {lang}
+                      {lang.label}
                     </button>
                   ))}
                 </div>
@@ -111,16 +117,16 @@ const Navigation = () => {
                 <div className="text-primary-foreground text-sm mb-2">Language:</div>
                 {languages.map(lang => (
                   <button
-                    key={lang}
+                    key={lang.code}
                     className={`block w-full text-left px-2 py-1 text-primary-foreground/80 hover:text-primary-foreground ${
-                      selectedLanguage === lang ? 'font-semibold' : ''
+                      i18n.language === lang.code ? 'font-semibold' : ''
                     }`}
                     onClick={() => {
-                      setSelectedLanguage(lang);
+                      i18n.changeLanguage(lang.code);
                       setIsMenuOpen(false);
                     }}
                   >
-                    {lang}
+                    {lang.label}
                   </button>
                 ))}
               </div>
