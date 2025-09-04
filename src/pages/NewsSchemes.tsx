@@ -1,64 +1,112 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar, ExternalLink, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+interface NewsArticle {
+  id: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  category: string;
+  url: string;
+  isNew: boolean;
+}
+
 const NewsSchemes = () => {
-  const newsItems = [
-    {
-      id: 1,
-      title: 'PM-KISAN Scheme: Direct Benefit Transfer for Farmers',
-      description: 'Financial support of ₹6,000 per year to eligible farmer families under the PM-KISAN scheme. Check your eligibility and application status.',
-      date: '2024-01-15',
-      category: 'Scheme',
-      link: '#',
-      isNew: true
-    },
-    {
-      id: 2,
-      title: 'Soil Health Card Distribution Drive',
-      description: 'Free soil testing and health cards distribution for all registered farmers. Get recommendations for crop-specific fertilizer usage.',
-      date: '2024-01-12',
-      category: 'Agriculture',
-      link: '#',
-      isNew: true
-    },
-    {
-      id: 3,
-      title: 'Kisan Credit Card - Enhanced Limit Announcement',
-      description: 'Credit limit increased for existing KCC holders. New simplified application process for first-time applicants.',
-      date: '2024-01-10',
-      category: 'Finance',
-      link: '#',
-      isNew: false
-    },
-    {
-      id: 4,
-      title: 'Organic Farming Certification Subsidies',
-      description: 'Government announces 50% subsidy on organic certification costs. Promoting chemical-free farming practices across states.',
-      date: '2024-01-08',
-      category: 'Scheme',
-      link: '#',
-      isNew: false
-    },
-    {
-      id: 5,
-      title: 'Weather Alert: Heavy Rainfall Expected',
-      description: 'IMD forecasts heavy rainfall in northern states. Farmers advised to take precautionary measures for crop protection.',
-      date: '2024-01-05',
-      category: 'Alert',
-      link: '#',
-      isNew: false
-    },
-    {
-      id: 6,
-      title: 'Digital Agriculture Mission 2024',
-      description: 'New digital initiatives to provide farmers with AI-powered crop monitoring and precision farming techniques.',
-      date: '2024-01-03',
-      category: 'Technology',
-      link: '#',
-      isNew: false
+  const [newsItems, setNewsItems] = useState<NewsArticle[]>([]);
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const toggleExpand = (id: string) => {
+    setExpandedItems(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
+
+  const isDescriptionLong = (description: string) => {
+    return description.split(' ').length > 30;
+  };
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const apiKey = import.meta.env.VITE_NEWS_API_KEY;
+        console.log('API Key:', apiKey); // This will help us verify if the key is being read
+        const response = await fetch(
+          `https://newsdata.io/api/1/news?apikey=${apiKey}&q=agriculture%20farming&country=in&language=en`
+        );
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to fetch news');
+        }
+
+        const data = await response.json();
+        
+        if (!data.results) {
+          throw new Error('No news data available');
+        }
+
+        const formattedNews: NewsArticle[] = data.results.map((article: any, index: number) => ({
+          id: index.toString(),
+          title: article.title,
+          description: article.description || 'No description available',
+          publishedAt: article.pubDate,
+          category: determineCategory(article.title),
+          url: article.link,
+          isNew: new Date(article.pubDate) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+        }));
+
+        setNewsItems(formattedNews);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+  const determineCategory = (title: string): string => {
+    const titleLower = title.toLowerCase();
+    if (titleLower.includes('scheme') || titleLower.includes('policy') || titleLower.includes('subsidy')) {
+      return 'Scheme';
+    } else if (titleLower.includes('technology') || titleLower.includes('digital')) {
+      return 'Technology';
+    } else if (titleLower.includes('finance') || titleLower.includes('loan') || titleLower.includes('credit')) {
+      return 'Finance';
+    } else if (titleLower.includes('warning') || titleLower.includes('alert') || titleLower.includes('weather')) {
+      return 'Alert';
+    } else {
+      return 'Agriculture';
     }
-  ];
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-subtle-gradient flex items-center justify-center">
+        <div className="text-xl text-muted-foreground">Loading news...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-subtle-gradient flex items-center justify-center">
+        <div className="text-xl text-destructive">{error}</div>
+      </div>
+    );
+  }
+
+  const defaultNewsItems: NewsArticle[] = [];
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -100,7 +148,7 @@ const NewsSchemes = () => {
         {/* News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {newsItems.map(item => (
-            <div key={item.id} className="farmer-card relative">
+            <div key={item.id} className="farmer-card relative flex flex-col min-h-[320px]">
               {item.isNew && (
                 <div className="absolute top-4 right-4 bg-destructive text-destructive-foreground text-xs px-2 py-1 rounded-full font-semibold">
                   NEW
@@ -114,7 +162,7 @@ const NewsSchemes = () => {
                   </span>
                   <div className="flex items-center gap-1 text-muted-foreground text-sm">
                     <Calendar className="w-4 h-4" />
-                    {new Date(item.date).toLocaleDateString()}
+                    {new Date(item.publishedAt).toLocaleDateString()}
                   </div>
                 </div>
                 
@@ -122,17 +170,36 @@ const NewsSchemes = () => {
                   {item.title}
                 </h3>
                 
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                <div className={`text-muted-foreground text-sm leading-relaxed mb-4 ${!expandedItems.has(item.id) && isDescriptionLong(item.description) ? 'line-clamp-3' : ''}`}>
                   {item.description}
-                </p>
+                </div>
+                {isDescriptionLong(item.description) && (
+                  <Button
+                    variant="link"
+                    size="sm"
+                    onClick={() => toggleExpand(item.id)}
+                    className="mb-4 p-0 h-auto font-semibold"
+                  >
+                    {expandedItems.has(item.id) ? 'Show Less' : 'Read More'}
+                  </Button>
+                )}
               </div>
               
-              <div className="flex items-center justify-between">
-                <Button variant="outline" size="sm" className="flex items-center gap-2">
-                  Read More
+              <div className="flex items-center justify-between mt-auto">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="flex items-center gap-2"
+                  onClick={() => window.open(item.url, '_blank')}
+                >
+                  View Full Article
                   <ArrowRight className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="sm">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => window.open(item.url, '_blank')}
+                >
                   <ExternalLink className="w-4 h-4" />
                 </Button>
               </div>

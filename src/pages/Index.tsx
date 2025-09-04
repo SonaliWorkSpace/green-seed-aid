@@ -59,8 +59,7 @@ const Index = () => {
                 Your Smart Farming Companion
               </h2>
               <p className="text-xl text-primary-foreground/80 mb-8 leading-relaxed max-w-xl">
-                Empowering farmers with AI-powered crop analysis, weather insights, and government scheme updates. 
-                Transform your farming with modern technology.
+              
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button className="accent-button text-lg px-8 py-4">
@@ -68,7 +67,7 @@ const Index = () => {
                   Start Farming Smart
                   <ArrowRight className="w-5 h-5" />
                 </Button>
-                <Button variant="outline" className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8 py-4">
+                <Button variant="outline" className="text-primary border-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8 py-4">
                   Watch Demo
                 </Button>
               </div>
@@ -91,7 +90,7 @@ const Index = () => {
       </section>
 
       {/* Quick Features */}
-      <section className="py-20 bg-subtle-gradient">
+      {/* <section className="py-20 bg-subtle-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
@@ -129,7 +128,7 @@ const Index = () => {
             })}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Interactive Sections */}
       <section className="py-20 bg-background">
@@ -174,8 +173,8 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Link to="/news" className="bg-primary-foreground/10 rounded-xl p-8 text-center hover:bg-primary-foreground/20 transition-colors group">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> 
+             <Link to="/news" className="bg-primary-foreground/10 rounded-xl p-8 text-center hover:bg-primary-foreground/20 transition-colors group">
               <div className="text-4xl mb-4">📰</div>
               <h3 className="text-2xl font-semibold text-primary-foreground mb-3">News & Schemes</h3>
               <p className="text-primary-foreground/80 mb-4">Stay updated with latest government schemes and agricultural news</p>

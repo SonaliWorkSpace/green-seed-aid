@@ -37,35 +37,36 @@ const Contact = () => {
 
   const faqData = [
     {
-      id: 'pest-detection',
-      question: 'How does the pest detection feature work?',
-      answer: 'Upload a clear photo of the affected crop or plant. Our AI system will analyze the image and provide identification of pests or diseases along with treatment recommendations.'
+      id: 'weather-alerts',
+      question: 'How do the weather alerts help protect my crops?',
+      answer: 'Our weather alerts monitor multiple conditions including extreme temperatures, high winds, heavy rainfall, and drought. You\'ll receive specific warnings and farming tips to protect your crops, such as when to provide shade, strengthen crop support, or improve drainage.'
     },
     {
-      id: 'soil-reports',
-      question: 'Can I upload my soil test reports?',
-      answer: 'Yes, you can upload soil test reports in PDF or image format. The system will extract key information and provide personalized fertilizer recommendations based on your soil health.'
+      id: 'crop-advisory',
+      question: 'What kind of farming advice do you provide?',
+      answer: 'We offer season-specific crop recommendations, best practices for cultivation, pest management strategies, and optimal irrigation schedules. Our advice is customized based on your location, current weather conditions, and crop type.'
     },
     {
-      id: 'weather-accuracy',
-      question: 'How accurate is the weather forecast?',
-      answer: 'We use data from the Indian Meteorological Department (IMD) and provide location-specific forecasts with 85-90% accuracy for 3-day predictions.'
+      id: 'schemes-benefits',
+      question: 'What government benefits and subsidies can I access?',
+      answer: 'We provide information about various schemes including PM-KISAN, crop insurance, subsidies for equipment and seeds, and minimum support prices. Our platform helps you understand eligibility criteria and guides you through the application process.'
     },
     {
-      id: 'schemes-eligibility',
-      question: 'How do I check my eligibility for government schemes?',
-      answer: 'Visit the News & Schemes section, select the scheme you\'re interested in, and use our eligibility checker tool. You\'ll need basic information like land size, crop type, and location.'
+      id: 'market-prices',
+      question: 'How can I get the best prices for my produce?',
+      answer: 'We provide daily updates on market prices across different mandis, direct connection to buyers, and information about government procurement programs. You can also access transportation services and storage facilities through our network.'
     },
     {
-      id: 'multilingual',
-      question: 'Is the app available in my local language?',
-      answer: 'Yes, we support multiple languages including Hindi, Odia, Bengali, and more. Use the language selector in the navigation menu to change the language.'
+      id: 'organic-farming',
+      question: 'How can I transition to organic farming?',
+      answer: 'We offer step-by-step guidance for organic transition, including natural pest control methods, organic fertilizer preparation, soil health management, and certification process guidance. We also connect you with successful organic farmers in your region.'
     },
     {
-      id: 'offline-access',
-      question: 'Can I use the app without internet?',
-      answer: 'Some features like weather forecast require internet connection. However, you can download educational content and farming guides for offline viewing.'
-    }
+      id: 'loan-assistance',
+      question: 'How can I get financial assistance for farming?',
+      answer: 'We provide information about Kisan Credit Cards, agricultural loans from banks, microfinance options, and government subsidies. Our platform helps you understand interest rates, repayment terms, and required documentation.'
+    },
+   
   ];
 
   return (
@@ -217,7 +218,7 @@ const Contact = () => {
             </div>
 
             {/* Emergency Support */}
-            <div className="farmer-card">
+            {/* <div className="farmer-card">
               <h3 className="text-xl font-semibold text-foreground mb-4">Emergency Support</h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
@@ -232,8 +233,8 @@ const Contact = () => {
                   <span className="text-foreground">Pest Outbreak Reporting</span>
                   <Button variant="outline" size="sm">Report</Button>
                 </div>
-              </div>
-            </div>
+              </div> 
+            </div> */}
           </div>
         </div>
 
@@ -267,7 +268,7 @@ const Contact = () => {
                   </div>
                 )}
               </div>
-            ))}
+            ))} 
           </div>
         </div>
       </div>
